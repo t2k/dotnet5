@@ -1,13 +1,9 @@
 namespace kyc.entities
 {
-  using System;
-  using System.Collections.Generic;
-  using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity.Spatial;
-
-  [Table("CustomerEmployeeRole")]
-  public partial class CustomerEmployeeRole
+  // using System.Data.Entity.Spatial;
+  [Table("CustomerEmployeeAssignment")]
+  public partial class CustomerEmployeeAssignment
   {
     public int Id { get; set; }
 
