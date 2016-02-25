@@ -7,7 +7,16 @@ namespace KYC.web.Models
     {
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            //builder.Conventions.Remove<PluralizingTableNameConvention>();
+
+      //configure with fluentAPI
+            builder.Configurations.Add(new CustomerEntityConfiguration());
+            builder.Configurations.Add(new PersonEntityConfiguration());
+            builder.Configurations.Add(new RiskReportEntityConfiguration());
+            builder.Configurations.Add(new CustomerRiskAssessmentEntityConfiguration());
+
+            base.OnModelCreating(builder);            
+            
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

@@ -9,6 +9,7 @@
   },
 
   "dependencies": {
+    "kyc.entities": "1.0.0-*",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.Sqlite": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
