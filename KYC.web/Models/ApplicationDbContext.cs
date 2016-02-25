@@ -1,5 +1,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
+
+using kyc.entities;
 
 namespace KYC.web.Models
 {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
-using KYC.Entities;
+﻿using kyc.entities;
+using Microsoft.Data.Entity.Metadata;
 
 namespace KYC.Web.DataContext.FluentAPI
 {
