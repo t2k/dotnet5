@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCoreCore.Builder;
+using Microsoft.AspNetCoreCore.Hosting;
+using Microsoft.AspNetCoreCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

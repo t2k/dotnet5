@@ -1,6 +1,6 @@
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCoreCore.Hosting;
+using Microsoft.AspNetCoreCore.Builder;
 
 namespace KYC.Web
 {
@@ -9,7 +9,7 @@ namespace KYC.Web
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                        .UseServer("Microsoft.AspNetCore.Server.Kestrel")
+                        .UseServer("Microsoft.AspNetCoreCore.Server.Kestrel")
                         .UseApplicationBasePath(Directory.GetCurrentDirectory())
                         .UseDefaultConfiguration(args)
                         .UseIISPlatformHandlerUrl()
