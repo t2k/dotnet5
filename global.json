@@ -1,6 +1,9 @@
 {
-  "projects": [ "kyc.entities", "KYC.web" ],
-  "sdk": {
-    "version": "1.0.0-rc1-update1"
-  }
+    "projects": [
+        "kyc.entities",
+        "KYC.web"
+    ],
+    "sdk": {
+        "version": "1.0.0-rc2-16444"
+    }
 }
