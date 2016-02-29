@@ -4,7 +4,7 @@ namespace kyc.entities
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity.Spatial;
+  
 
   [Table("CustomerOwnership")]
   public partial class CustomerOwnership

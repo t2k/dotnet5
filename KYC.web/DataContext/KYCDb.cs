@@ -1,19 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
-
-using KYC.Web.DataContext.FluentAPI;
-
-
+﻿
 namespace KYC.Web.DataContext
 {
   public class KYCDb : DbContext
   {
-    public KYCDb()
-      : base("name=KYCdb")
-    {
-      //Database.SetInitializer<KYCDb>(new KYCDbInitializer());
-      //Database.Log = sql => Debug.Write(sql);
-    }
 
     public virtual DbSet<CIPDetail> CIPDetails { get; set; }
     public virtual DbSet<FinancialInstitution> FIDetails { get; set; }
@@ -59,13 +48,13 @@ namespace KYC.Web.DataContext
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
-      modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+      //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
       //configure with fluentAPI
-      modelBuilder.Configurations.Add(new CustomerEntityConfiguration());
-      modelBuilder.Configurations.Add(new PersonEntityConfiguration());
-      modelBuilder.Configurations.Add(new RiskReportEntityConfiguration());
-      modelBuilder.Configurations.Add(new CustomerRiskAssessmentEntityConfiguration());
+      //modelBuilder.Configurations.Add(new CustomerEntityConfiguration());
+      //modelBuilder.Configurations.Add(new PersonEntityConfiguration());
+      //modelBuilder.Configurations.Add(new RiskReportEntityConfiguration());
+      //modelBuilder.Configurations.Add(new CustomerRiskAssessmentEntityConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }
