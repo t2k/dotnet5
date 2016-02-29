@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 ﻿
+=======
+﻿using Microsoft.AspNetCore.Identity.EntityFramework;
+using Microsoft.Data.Entity;
+
+using KYC.Web.DataContext.FluentAPI;
+
+
+>>>>>>> 2d846b8ac94a8c76abb3979718a9689a1d6de037
 namespace KYC.Web.DataContext
 {
   public class KYCDb : DbContext

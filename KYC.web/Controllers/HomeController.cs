@@ -1,5 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+<<<<<<< HEAD
+=======
+using System.Threading.Tasks;
+>>>>>>> 2d846b8ac94a8c76abb3979718a9689a1d6de037
 using Microsoft.AspNetCore.Mvc;
 
 namespace KYC.web.Controllers

@@ -1,8 +1,21 @@
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 //using Microsoft.Data.Entity;
+=======
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCoreCore.Authorization;
+using Microsoft.AspNetCoreCore.Identity;
+using Microsoft.AspNetCoreCore.Mvc;
+using Microsoft.AspNetCoreCore.Mvc.Rendering;
+using Microsoft.Data.Entity;
+>>>>>>> 2d846b8ac94a8c76abb3979718a9689a1d6de037
 using Microsoft.Extensions.Logging;
 using KYC.web.Models;
 using KYC.web.Services;
