@@ -1,5 +1,5 @@
 {
-  "name": "KYC.web",
+  "name": "KYCweb",
   "version": "0.0.0",
   "devDependencies": {
     "gulp": "^3.9.0",
