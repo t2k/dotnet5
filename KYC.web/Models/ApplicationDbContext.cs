@@ -1,8 +1,6 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using kyc.entities;
-using Microsoft.Extensions.PlatformAbstractions;
-
 
 namespace KYC.web.Models
 {
