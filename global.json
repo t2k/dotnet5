@@ -1,9 +1,9 @@
 {
     "projects": [
-        "kyc.entities",
-        "KYC.web"
+        "KYC.Entities",
+        "KYC.Web"
     ],
     "sdk": {
-        "version": "1.0.0-rc1-update1"
+        "version": "1.0.0-rc1-final"
     }
 }

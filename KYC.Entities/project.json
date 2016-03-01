@@ -1,5 +1,6 @@
 {
-    "version": "1.0.0-*",
+    "version": "1.0.0",
+    "name": "KYC.Entities",
     "description": "KYC.Entities",
     "authors": [
         "Jack Killilea",
@@ -10,9 +11,6 @@
     ],
     "projectUrl": "",
     "licenseUrl": "",
-    "compilationOptions": {
-        "emitEntryPoint": true
-    },
     "tooling": {
         "defaultNamespace": "KYC.Entities"
     },
