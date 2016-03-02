@@ -1,13 +1,12 @@
 {
     "webroot": "wwwroot",
     "version": "1.0.0-*",
-    "name": "KYC.Web",
-    "description": "KYC MVC web application",
+    "name": "KYCWeb",
+    "description": "Know Your Customer MVC web application",
     "userSecretsId": "aspnet5-KYCWeb-1ea2d80e-ca56-48d2-9759-a09a5890a807",
     "compilationOptions": {
         "emitEntryPoint": true
     },
-    
     "tooling": {
         "defaultNamespace": "KYC.Web"
     },

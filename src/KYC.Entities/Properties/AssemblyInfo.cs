@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("KYC.Entities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("DZ BANK AG")]
+[assembly: AssemblyCompany("JRK Enterprise Cloud Services")]
 [assembly: AssemblyProduct("KYC.Entities")]
 [assembly: AssemblyCopyright("Copyright © DZ BANK AG 2015")]
 [assembly: AssemblyTrademark("")]
