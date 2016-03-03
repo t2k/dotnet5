@@ -9,10 +9,6 @@ namespace KYC.Entities
   [Table("RiskReport")]
   public partial class RiskReport
   {
-    public RiskReport()
-    {
-      this.RiskItems = new HashSet<RiskItem>();
-    }
 
     public int Id { get; set; }
 
@@ -23,6 +19,6 @@ namespace KYC.Entities
     [Required, Display(Name = "Version")]
     public string SemVer { get; set; }
 
-    public virtual ICollection<RiskItem> RiskItems { get; set; }
+    public List<RiskReportItem> RiskReportItems { get; set; }
   }
 }

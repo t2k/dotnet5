@@ -11,12 +11,32 @@ namespace KYC.Web.Models
         public DbSet<RiskClass> RiskClasses { get; set; }
         public DbSet<RiskItem> RiskItems { get; set; }
         public DbSet<RiskReport> RiskReports { get; set; }
+        
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-            // builder.Entity<Customer>().HasMany(n => n.Notes).WithOne(c => c.Customer);
-            //  builder.Entity<Customer>().HasMany(l => l.Locations).WithOne(c => c.Customer);
+            builder.Entity<Blog>().HasMany(p=>p.Posts).WithOne();
+            
+            builder.Entity<RiskItem>().HasOne(r => r.RiskClass).WithMany(i => i.RiskItems);
+            builder.Entity<RiskItem>().HasOne(r => r.RiskCategory).WithMany(i => i.RiskItems);
+            
+            // riskReportItem
+            // set key
+            builder.Entity<RiskReportItem>()
+            .HasKey(k => new {k.RiskReportId, k.RiskItemId});
+            
+            builder.Entity<RiskReportItem>().HasOne(r => r.RiskReport)
+            .WithMany(i => i.RiskReportItems)
+            .HasForeignKey(k => k.RiskReportId);
+            
+            builder.Entity<RiskReportItem>().HasOne(r => r.RiskItem)
+            .WithMany(i => i.RiskReportItems)
+            .HasForeignKey(k => k.RiskItemId);
+            
+            
             // builder.Entity<Customer>().HasMany(d => d.Documents).WithOne(c => c.Customer);
 
             base.OnModelCreating(builder);

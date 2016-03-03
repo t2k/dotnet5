@@ -9,10 +9,6 @@ namespace KYC.Entities
   [Table("RiskCategory")]
   public partial class RiskCategory
   {
-    public RiskCategory()
-    {
-      this.RiskItems = new HashSet<RiskItem>();
-    }
 
     public int Id { get; set; }
 
@@ -22,6 +18,6 @@ namespace KYC.Entities
     [Display(Name="Sort Order")]
     public int Ordinal { get; set; }
 
-    public virtual ICollection<RiskItem> RiskItems { get; set; }
+    public virtual List<RiskItem> RiskItems { get; set; }
   }
 }
