@@ -15,7 +15,7 @@ namespace KYC.Web
     public class Startup
     {
         public IConfigurationRoot Configuration { get; set; }
-        
+
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Set up configuration sources.
@@ -28,12 +28,12 @@ namespace KYC.Web
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
             }
-            
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
             //Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/kycdb.sqlite";
         }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -75,8 +75,10 @@ namespace KYC.Web
                 {
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                     {
+                        System.Console.WriteLine("Database has started");
                         serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.Migrate();
+                             .Database.EnsureCreated(); //.Migrate();
+                        System.Console.WriteLine("Database has created");
                     }
                 }
                 catch { }
