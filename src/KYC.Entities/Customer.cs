@@ -32,17 +32,20 @@ namespace KYC.Entities
     // save public virtual CustomerOwnership CustomerOwnership { get; set; }
     [ScaffoldColumn(false)]
     public int SAPDetailsId { get; set; }
+    
+    
     public CustomerSAPDetail SAPDetail { get; set; }
 
-    public List<Interface> Interfaces { get; set; }
+    public virtual List<CustomerRiskAssessment> CustomerRiskReports {get;set;}
+    public virtual List<Interface> Interfaces { get; set; }
 
-    public List<CustomerRiskAssessment> CustomerRiskReports { get; set; }
+    public virtual List<CustomerRiskAssessment> CustomerRiskReports { get; set; }
 
-    public List<Event> Events { get; set; }
+    public virtual List<Event> Events { get; set; }
 
-    public List<Note> Notes { get; set; }
+    public virtual List<Note> Notes { get; set; }
 
-    public List<Location> Locations { get; set; }
-    public List<CustomerDocument> Documents { get; set; }
+    public virtual List<Location> Locations { get; set; }
+    public virtual List<CustomerDocument> Documents { get; set; }
   }
 }
