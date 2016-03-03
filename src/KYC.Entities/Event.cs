@@ -1,12 +1,11 @@
 namespace KYC.Entities
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
-  using System.ComponentModel.DataAnnotations.Schema;
+  //using System.ComponentModel.DataAnnotations.Schema;
   // using System.Data.Entity.Spatial;
 
-  [Table("Event")]
+  //[Table("Event")]
   public partial class Event
   {
     public int Id { get; set; }
@@ -14,9 +13,7 @@ namespace KYC.Entities
     [Required]
     public KYCEvent Type { get; set; }
     public DateTime Timestamp { get; set; }
-    public int EmployeeId { get; set; }
-    public Employee Employee { get; set; }
-
-    public virtual ICollection<Customer> Customers { get; set; }
+    public int CustomerId {get;set;}
+    public Customer Customer { get; set; }
   }
 }

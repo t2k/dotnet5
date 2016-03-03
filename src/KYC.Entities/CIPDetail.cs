@@ -8,13 +8,9 @@ namespace KYC.Entities
   [Table("CIPDetail")]
   public class CIPDetail
   {
-    public CIPDetail()
-    {
-      CoIdentifiers = new HashSet<PublicIdentifier>();
-    }
-
     [Key, ForeignKey("Customer")]
     public int CustomerId { get; set; }
+    public Customer Customer { get; set; }
 
     [Display(Name="Account Purpose"), DataType(DataType.MultilineText)]
     public string AccountPurpose { get; set; }
@@ -32,7 +28,7 @@ namespace KYC.Entities
     [Display(Name = "Regulatin GG Certification")]
     public bool RegGgGiven { get; set; }
 
-    public virtual ICollection<PublicIdentifier> CoIdentifiers { get; set; }
-    public virtual Customer Customer { get; set; }
+    public List<PublicIdentifier> Identifiers { get; set; }
+    
   }
 }

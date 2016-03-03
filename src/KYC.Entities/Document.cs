@@ -24,10 +24,5 @@ namespace KYC.Entities
     [DataType(DataType.DateTime)]
     public DateTime TimeStamp { get; set; }
 
-
-    // [DataType(DataType.Url)]
-    // public string FileUrl { get; set; }
-
-    public virtual ICollection<Customer> Customers { get; set; }
   }
 }

@@ -15,15 +15,15 @@ namespace KYC.Entities
 
     [ForeignKey("Customer")]
     public int CustomerId { get; set; }
-    public virtual Customer Customer { get; set; }
+    public Customer Customer { get; set; }
 
-    [ForeignKey("Document")]
     public Guid DocumentId { get; set; }
-    public virtual Document Document { get; set; }
+    [ForeignKey("DocumentId")]
+    public Document Document { get; set; }
 
     [Display(Name="Document Type")]
     public int DocumentTypeId { get; set; }
-    public virtual DocumentType DocumentType { get; set; }
+    public DocumentType DocumentType { get; set; }
     /// <summary>
     /// user string
     /// </summary>

@@ -4,7 +4,7 @@ namespace KYC.Entities
   using System.Collections.Generic;
   using System.ComponentModel.DataAnnotations;
   using System.ComponentModel.DataAnnotations.Schema;
-  using System.Data.Entity.Spatial;
+  
 
   [Table("CustomerRiskAssessment")]
   public partial class CustomerRiskAssessment
@@ -19,7 +19,7 @@ namespace KYC.Entities
     /// </summary>
     public CustomerRiskAssessment()
     {
-      AssessedRiskItems = new List<RiskItem>();
+      //AssessedRiskItems = new HashSet<RiskItem>();
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ namespace KYC.Entities
     /// </summary>
     [ForeignKey("Customer")]
     public int CustomerId { get; set; }
-    public virtual Customer Customer { get; set; }
+    public Customer Customer { get; set; }
 
     /// <summary>
     /// Report ID foreign Key
@@ -98,6 +98,6 @@ namespace KYC.Entities
     /// <summary>
     /// user assessed risk items
     /// </summary>
-    public virtual ICollection<RiskItem> AssessedRiskItems { get; set; }
+    public ICollection<RiskItem> AssessedRiskItems { get; set; }
   }
 }

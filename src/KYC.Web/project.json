@@ -1,7 +1,6 @@
 {
     "webroot": "wwwroot",
-    "version": "1.0.0-*",
-    "name": "KYCWeb",
+    "version": "1.0.0-dev",
     "description": "Know Your Customer MVC web application",
     "userSecretsId": "aspnet5-KYCWeb-1ea2d80e-ca56-48d2-9759-a09a5890a807",
     "compilationOptions": {
@@ -11,7 +10,7 @@
         "defaultNamespace": "KYC.Web"
     },
     "dependencies": {
-        "KYC.Entities": "1.0.0",
+        "KYC.Entities": "1.0.0-*",
         "EntityFramework.Commands": "7.0.0-rc1-final",
         "EntityFramework.Sqlite": "7.0.0-rc1-final",
         "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
@@ -38,7 +37,6 @@
         "ef": "EntityFramework.Commands"
     },
     "frameworks": {
-        "dnx451": {},
         "dnxcore50": {}
     },
     "exclude": [

@@ -17,8 +17,8 @@ namespace KYC.Entities
     [Required]
     public string Value { get; set; }
 
-    public int CIPDetailId { get; set; }
-
-    public virtual CIPDetail CIPDetail { get; set; }
+    public int CustomerId { get; set; }
+    [ForeignKey("CustomerId")]
+    public CIPDetail CIPDetail { get; set; }
   }
 }
