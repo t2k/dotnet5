@@ -12,7 +12,6 @@ namespace KYC.Entities
     public RiskReport()
     {
       this.RiskItems = new HashSet<RiskItem>();
-      this.CustomerRiskReports = new HashSet<CustomerRiskAssessment>();
     }
 
     public int Id { get; set; }
@@ -25,8 +24,5 @@ namespace KYC.Entities
     public string SemVer { get; set; }
 
     public virtual ICollection<RiskItem> RiskItems { get; set; }
-    public virtual ICollection<CustomerRiskAssessment> CustomerRiskReports { get; set; }
-
-
   }
 }

@@ -29,6 +29,6 @@ namespace KYC.Entities
     /// many to many Ri to RRs
     /// </summary>
     public virtual ICollection<RiskReport> RiskReports { get; set; }
-    public virtual ICollection<CustomerRiskAssessment> AssessedRiskItems { get; set; }
+
   }
 }
