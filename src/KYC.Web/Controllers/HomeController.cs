@@ -1,9 +1,9 @@
 using Microsoft.AspNet.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using KYC.Entities;
 using Microsoft.Data.Entity;
-using KYC.Web.Models;
+using KYC.Web.Models.Identity;
+using KYC.Web.Models.KYC;
 using System;
 
 namespace KYC.Web.Controllers
@@ -11,8 +11,13 @@ namespace KYC.Web.Controllers
 
     public class HomeController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
-                
+        private KYCContext _db;
+
+        public HomeController(KYCContext db)
+        {
+            _db = db;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -21,16 +26,16 @@ namespace KYC.Web.Controllers
         public IActionResult RIIndex()
         {
             List<RiskItem> items;
-            
+
             try
             {
-              items = _db.RiskItems.Include(r => r.RiskCategory).Include(r => r.RiskClass).ToList();    
+                items = _db.RiskItems.Include(r => r.RiskCategory).Include(r => r.RiskClass).ToList();
             }
             catch (System.Exception)
             {
                 items = new List<RiskItem>();
             }
-            
+
             Console.WriteLine(@"Count of RiskItems{items.Count}");
             return View(items);
         }

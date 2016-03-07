@@ -1,4 +1,4 @@
-namespace KYC.Entities
+namespace KYC.Web.Models.KYC
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -15,19 +15,16 @@ namespace KYC.Entities
 
         [Display(Name = "Risk Score"), Required]
         public int Score { get; set; }
+        [Display(Name = "Classification")]
+        public int RiskClassId { get; set; }
+        public RiskClass RiskClass { get; set; }
+
 
         [Display(Name = "Category")]
         public int RiskCategoryId { get; set; }
-        public virtual RiskCategory RiskCategory { get; set; }
-
-        [Display(Name = "Classification")]
-        public int RiskClassId { get; set; }
-        public virtual RiskClass RiskClass { get; set; }
-
-        /// <summary>
-        /// many to many Ri to RRs
-        /// </summary>
-
-        public List<RiskReportItem> RiskReportItems { get; set; }
+        public RiskCategory RiskCategory { get; set; }
+        
+        
+        public virtual List<RiskReportItem> RiskReportItems {get;set;}
     }
 }

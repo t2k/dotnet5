@@ -7,7 +7,7 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
-using KYC.Web.Models;
+using KYC.Web.Models.Identity;
 using KYC.Web.Services;
 using KYC.Web.ViewModels.Manage;
 

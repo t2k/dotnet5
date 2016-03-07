@@ -6,9 +6,9 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using KYC.Web.Models;
+using KYC.Web.Models.Identity;
+using KYC.Web.Models.KYC;
 using KYC.Web.Services;
-using KYC.Entities;
 
 namespace KYC.Web
 {
@@ -41,8 +41,8 @@ namespace KYC.Web
             // Add framework services.
             services.AddEntityFramework()
                 .AddSqlite()
-                .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(connection));
+                .AddDbContext<KYCContext>(options => options.UseSqlite(connection))
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -65,30 +65,50 @@ namespace KYC.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<KYCContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<KYCContext>().EnsureSeedData();
+                }
+                
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
-                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-                try
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
                 {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        System.Console.WriteLine("Database has started");
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.EnsureCreated(); //.Migrate();
-                        System.Console.WriteLine("Database has created");
-                    }
+                    serviceScope.ServiceProvider.GetService<KYCContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<KYCContext>().EnsureSeedData();
                 }
-                catch { }
+                
             }
+            
+            /*
+            // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+            try
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    System.Console.WriteLine("Database has started");
+                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                         .Database.EnsureCreated(); //.Migrate();
+                    System.Console.WriteLine("Database has created");
+                }
+            }
+            catch { }
+            */
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
 
             app.UseIdentity();
+            app.EnsureRolesCreated();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 

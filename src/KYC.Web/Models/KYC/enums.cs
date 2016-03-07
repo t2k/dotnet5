@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Linq;
 
-namespace KYC.Entities
+namespace KYC.Web.Models.KYC
 {
 
   //static methods for Enum 

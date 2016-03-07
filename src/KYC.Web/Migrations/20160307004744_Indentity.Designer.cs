@@ -3,118 +3,20 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using KYC.Web.Models;
+using KYC.Web.Models.Identity;
 
 namespace KYC.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160303033830_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20160307004744_Indentity")]
+    partial class Indentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");
 
-            modelBuilder.Entity("KYC.Entities.Blog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-                });
-
-            modelBuilder.Entity("KYC.Entities.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BlogId");
-
-                    b.Property<string>("Content");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired();
-
-                    b.Property<int>("Ordinal");
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "RiskCategory");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Classification")
-                        .IsRequired();
-
-                    b.Property<int>("Ordinal");
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "RiskClass");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<int>("RiskCategoryId");
-
-                    b.Property<int>("RiskClassId");
-
-                    b.Property<int>("Score");
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "RiskItem");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("SemVer")
-                        .IsRequired();
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "RiskReport");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskReportItem", b =>
-                {
-                    b.Property<int>("RiskReportId");
-
-                    b.Property<int>("RiskItemId");
-
-                    b.HasKey("RiskReportId", "RiskItemId");
-                });
-
-            modelBuilder.Entity("KYC.Web.Models.ApplicationUser", b =>
+            modelBuilder.Entity("KYC.Web.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -160,6 +62,39 @@ namespace KYC.Web.Migrations
                         .HasAnnotation("Relational:Name", "UserNameIndex");
 
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                });
+
+            modelBuilder.Entity("KYC.Web.Models.Identity.UserAddress", b =>
+                {
+                    b.Property<int>("UserAddressId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Addressee")
+                        .IsRequired();
+
+                    b.Property<string>("CityOrTown")
+                        .IsRequired();
+
+                    b.Property<string>("Country")
+                        .IsRequired();
+
+                    b.Property<string>("LineOne")
+                        .IsRequired();
+
+                    b.Property<string>("LineTwo");
+
+                    b.Property<string>("StateOrProvince")
+                        .IsRequired();
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.Property<string>("ZipOrPostalCode")
+                        .IsRequired();
+
+                    b.HasKey("UserAddressId");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetUserAddresses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
@@ -244,33 +179,11 @@ namespace KYC.Web.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("KYC.Entities.Post", b =>
+            modelBuilder.Entity("KYC.Web.Models.Identity.UserAddress", b =>
                 {
-                    b.HasOne("KYC.Entities.Blog")
+                    b.HasOne("KYC.Web.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("BlogId");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskItem", b =>
-                {
-                    b.HasOne("KYC.Entities.RiskCategory")
-                        .WithMany()
-                        .HasForeignKey("RiskCategoryId");
-
-                    b.HasOne("KYC.Entities.RiskClass")
-                        .WithMany()
-                        .HasForeignKey("RiskClassId");
-                });
-
-            modelBuilder.Entity("KYC.Entities.RiskReportItem", b =>
-                {
-                    b.HasOne("KYC.Entities.RiskItem")
-                        .WithMany()
-                        .HasForeignKey("RiskItemId");
-
-                    b.HasOne("KYC.Entities.RiskReport")
-                        .WithMany()
-                        .HasForeignKey("RiskReportId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -282,14 +195,14 @@ namespace KYC.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("KYC.Web.Models.ApplicationUser")
+                    b.HasOne("KYC.Web.Models.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("KYC.Web.Models.ApplicationUser")
+                    b.HasOne("KYC.Web.Models.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -300,7 +213,7 @@ namespace KYC.Web.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("KYC.Web.Models.ApplicationUser")
+                    b.HasOne("KYC.Web.Models.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });

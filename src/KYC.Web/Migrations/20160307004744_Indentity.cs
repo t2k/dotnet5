@@ -4,61 +4,10 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace KYC.Web.Migrations
 {
-    public partial class InitialDatabase : Migration
+    public partial class Indentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Blog",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blog", x => x.Id);
-                });
-            migrationBuilder.CreateTable(
-                name: "RiskCategory",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CategoryName = table.Column<string>(nullable: false),
-                    Ordinal = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskCategory", x => x.Id);
-                });
-            migrationBuilder.CreateTable(
-                name: "RiskClass",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Classification = table.Column<string>(nullable: false),
-                    Ordinal = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskClass", x => x.Id);
-                });
-            migrationBuilder.CreateTable(
-                name: "RiskReport",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SemVer = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskReport", x => x.Id);
-                });
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -97,49 +46,27 @@ namespace KYC.Web.Migrations
                     table.PrimaryKey("PK_IdentityRole", x => x.Id);
                 });
             migrationBuilder.CreateTable(
-                name: "Post",
+                name: "AspNetUserAddresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    UserAddressId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    BlogId = table.Column<int>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Addressee = table.Column<string>(nullable: false),
+                    CityOrTown = table.Column<string>(nullable: false),
+                    Country = table.Column<string>(nullable: false),
+                    LineOne = table.Column<string>(nullable: false),
+                    LineTwo = table.Column<string>(nullable: true),
+                    StateOrProvince = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    ZipOrPostalCode = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Post", x => x.Id);
+                    table.PrimaryKey("PK_UserAddress", x => x.UserAddressId);
                     table.ForeignKey(
-                        name: "FK_Post_Blog_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Blog",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-            migrationBuilder.CreateTable(
-                name: "RiskItem",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: false),
-                    RiskCategoryId = table.Column<int>(nullable: false),
-                    RiskClassId = table.Column<int>(nullable: false),
-                    Score = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RiskItem_RiskCategory_RiskCategoryId",
-                        column: x => x.RiskCategoryId,
-                        principalTable: "RiskCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RiskItem_RiskClass_RiskClassId",
-                        column: x => x.RiskClassId,
-                        principalTable: "RiskClass",
+                        name: "FK_UserAddress_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -225,29 +152,6 @@ namespace KYC.Web.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-            migrationBuilder.CreateTable(
-                name: "RiskReportItem",
-                columns: table => new
-                {
-                    RiskReportId = table.Column<int>(nullable: false),
-                    RiskItemId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RiskReportItem", x => new { x.RiskReportId, x.RiskItemId });
-                    table.ForeignKey(
-                        name: "FK_RiskReportItem_RiskItem_RiskItemId",
-                        column: x => x.RiskItemId,
-                        principalTable: "RiskItem",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RiskReportItem_RiskReport_RiskReportId",
-                        column: x => x.RiskReportId,
-                        principalTable: "RiskReport",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
@@ -264,19 +168,13 @@ namespace KYC.Web.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("Post");
-            migrationBuilder.DropTable("RiskReportItem");
+            migrationBuilder.DropTable("AspNetUserAddresses");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");
             migrationBuilder.DropTable("AspNetUserRoles");
-            migrationBuilder.DropTable("Blog");
-            migrationBuilder.DropTable("RiskItem");
-            migrationBuilder.DropTable("RiskReport");
             migrationBuilder.DropTable("AspNetRoles");
             migrationBuilder.DropTable("AspNetUsers");
-            migrationBuilder.DropTable("RiskCategory");
-            migrationBuilder.DropTable("RiskClass");
         }
     }
 }
