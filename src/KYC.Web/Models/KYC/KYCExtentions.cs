@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Data.Entity;
 using System.Collections.Generic;
 
 namespace KYC.Web.Models.KYC
@@ -142,10 +143,18 @@ namespace KYC.Web.Models.KYC
                     report.SemVer = "v1.0.0";
 
                     riskItems.ForEach(i => report.RiskItems.Add(i));
+                    riskItems.ForEach(i => report.RiskReportItems.Add( new RiskReportItem { RiskReportId=report.RiskReportId, RiskItemId= i.Id}));
                     Console.WriteLine($"Risk Report is created on the stack, now saving...");
                     context.RiskReports.Add(report);
+                    Console.WriteLine($"report has {report.RiskItems.Count} items");
+
                     context.SaveChanges();
-                    Console.WriteLine($"Risk Report id#:{report.RiskReportId} was created like a boss");                    
+                    Console.WriteLine($"Risk Report id#:{report.RiskReportId} was created like a boss");
+                    var tmp = context.RiskReports.Include(i => i.RiskItems).Include(i => i.RiskReportItems).ToList();
+                    Console.WriteLine("getting report");
+                    Console.WriteLine($"Risk Report Count {tmp.Count}");
+                    Console.WriteLine($"RiskItems Count {tmp[0].RiskItems.Count}");
+                    Console.WriteLine($"RiskReportItems Count {tmp[0].RiskReportItems.Count}");
 
                 }
 
