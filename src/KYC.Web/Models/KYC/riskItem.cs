@@ -24,7 +24,6 @@ namespace KYC.Web.Models.KYC
         public int RiskCategoryId { get; set; }
         public RiskCategory RiskCategory { get; set; }
         
-        
         public virtual List<RiskReportItem> RiskReportItems {get;set;}
     }
 }

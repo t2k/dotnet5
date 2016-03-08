@@ -8,8 +8,8 @@ using KYC.Web.Models.KYC;
 namespace KYC.Web.Migrations.KYC
 {
     [DbContext(typeof(KYCContext))]
-    [Migration("20160307013234_InitKYC")]
-    partial class InitKYC
+    [Migration("20160308171509_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

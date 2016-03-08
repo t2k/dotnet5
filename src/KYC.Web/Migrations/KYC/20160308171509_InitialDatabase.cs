@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace KYC.Web.Migrations.KYC
 {
-    public partial class InitKYC : Migration
+    public partial class InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,0 +1,18 @@
+﻿@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Data Migration:</h2>
+<hr />
+
+<div class="row">
+  <div class="col-md-3">
+    @Html.ActionLink("Migrate Employee Data", "DoEmployee", null, new { @class = "btn btn-info btn-block" })
+  </div>
+  <div class="col-md-3">
+    @Html.ActionLink("Migrate Risk Data", "DoRiskMigration", null, new { @class = "btn btn-info btn-block" })
+  </div>
+  <div class="col-md-3">
+    @Html.ActionLink("Migrate Document Data", "DoDocumentMigration", null, new { @class = "btn btn-info btn-block" })
+  </div>
+</div>
