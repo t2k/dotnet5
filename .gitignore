@@ -232,3 +232,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# no temp database
+KYC.Web/KYCDB.sqlite
+
