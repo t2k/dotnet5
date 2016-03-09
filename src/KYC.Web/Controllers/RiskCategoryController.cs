@@ -6,11 +6,11 @@ using System;
 
 namespace KYC.Web.Controllers
 {
-    public class RiskClassController : Controller
+    public class RiskCategoryController : Controller
     {
         private KYCContext _db;
 
-        public RiskClassController(KYCContext db)
+        public RiskCategoryController(KYCContext db)
         {
             _db=db;
             
@@ -21,8 +21,8 @@ namespace KYC.Web.Controllers
         // GET: Admin/RiskCategory
         public IActionResult Index()
         {
-
-            return View(_db.RiskClasses.ToList());
+            Console.WriteLine("Index controller!");
+            return View(_db.RiskCategories.ToList());
         }
 
         // GET: Admin/RiskCategory/Details/5
@@ -32,12 +32,12 @@ namespace KYC.Web.Controllers
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskCategory riskCategory = _db.RiskCategories.SingleOrDefault(i=>i.Id==id);
+            if (riskCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            return View(riskCategory);
         }
 
         // GET: Admin/RiskCategory/Create
@@ -51,16 +51,16 @@ namespace KYC.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,CategoryName,Ordinal")] RiskClass riskClass)
+        public IActionResult Create([Bind("Id,CategoryName,Ordinal")] RiskCategory riskCategory)
         {
             if (ModelState.IsValid)
             {
-                _db.RiskClasses.Add(riskClass);
+                _db.RiskCategories.Add(riskCategory);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(riskClass);
+            return View(riskCategory);
         }
 
         // GET: Admin/RiskCategory/Edit/5
@@ -70,12 +70,12 @@ namespace KYC.Web.Controllers
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskCategory riskCategory = _db.RiskCategories.SingleOrDefault(i=>i.Id==id);
+            if (riskCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            return View(riskCategory);
         }
 
         // POST: Admin/RiskCategory/Edit/5
@@ -83,15 +83,15 @@ namespace KYC.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,CategoryName,Ordinal")] RiskClass riskClass)
+        public IActionResult Edit([Bind("Id,CategoryName,Ordinal")] RiskCategory riskCategory)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(riskClass).State = EntityState.Modified;
+                _db.Entry(riskCategory).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(riskClass);
+            return View(riskCategory);
         }
 
         // GET: Admin/RiskCategory/Delete/5
@@ -101,12 +101,12 @@ namespace KYC.Web.Controllers
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskCategory riskCategory = _db.RiskCategories.SingleOrDefault(i=>i.Id==id);
+            if (riskCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            return View(riskCategory);
         }
 
         // POST: Admin/RiskCategory/Delete/5
@@ -114,11 +114,19 @@ namespace KYC.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            _db.RiskClasses.Remove(riskClass);
+            RiskCategory riskCategory = _db.RiskCategories.SingleOrDefault(i=>i.Id==id);
+            _db.RiskCategories.Remove(riskCategory);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

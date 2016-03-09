@@ -141,28 +141,29 @@ namespace KYC.Web.Models.KYC
                     RiskReport report = new RiskReport();
                     report.Title = "DZ Bank New York: Risk Rating Report";
                     report.SemVer = "v1.0.0";
-                    riskItems.ToList().ForEach(i => report.RiskItems.Add(i));
-                    riskItems.ForEach(i => report.RiskReportItems.Add( new RiskReportItem { RiskReportId=report.RiskReportId, RiskItemId= i.Id}));
+                    riskItems.ForEach(i => report.RiskItems.Add(i));
+                    context.SaveChanges();
+                    //riskItems.ForEach(i => report.RiskReportItems.Add( new RiskReportItem { RiskReportId=report.RiskReportId, RiskItemId= i.Id}));
 
-                    RiskReport report2 = new RiskReport();
-                    report2.Title = "DZ Bank New York: Risk Rating Report#2";
-                    report2.SemVer = "v1.0.1";
-                    riskItems.Where(i=>i.Id>10).ToList().ForEach(i => report2.RiskItems.Add(i));
-                    riskItems.Where(i=>i.Id>10).ToList().ForEach(i => report2.RiskReportItems.Add( new RiskReportItem { RiskReportId=report2.RiskReportId, RiskItemId= i.Id}));
+                    //RiskReport report2 = new RiskReport();
+                    //report2.Title = "DZ Bank New York: Risk Rating Report#2";
+                    //report2.SemVer = "v1.0.1";
+                    //riskItems.Where(i=>i.Id>10).ToList().ForEach(i => report2.RiskItems.Add(i));
+                    //riskItems.Where(i=>i.Id>10).ToList().ForEach(i => report2.RiskReportItems.Add( new RiskReportItem { RiskReportId=report2.RiskReportId, RiskItemId= i.Id}));
 
                     
                     Console.WriteLine($"Risk Report is created on the stack, now saving...");
                     context.RiskReports.Add(report);
-                    Console.WriteLine($"report has {report.RiskItems.Count} items");
-                    context.RiskReports.Add(report2);
-                    Console.WriteLine($"report has {report2.RiskItems.Count} items");
                     context.SaveChanges();
+                    
+                    Console.WriteLine($"report has {report.RiskItems.Count} items");
+                    //context.RiskReports.Add(report2);
+                    //Console.WriteLine($"report has {report2.RiskItems.Count} items");
+                    //context.SaveChanges();
                     Console.WriteLine($"Reports saved like a boss!");
                     
-                    Console.WriteLine("getting reports");
-                    
-                    var tmp = context.RiskReports.Include(i => i.RiskItems).Include(i => i.RiskReportItems).ToList();
-                    tmp.ForEach(i=> Console.WriteLine($"{i.Title} has {i.RiskItems.Count} RiskItems and {i.RiskReportItems.Count} RiskReportItmes"));
+                    //var tmp = context.RiskReports.Include(i => i.RiskItems).Include(i => i.RiskReportItems).ToList();
+                    //tmp.ForEach(i=> Console.WriteLine($"{i.Title} has {i.RiskItems.Count} RiskItems and {i.RiskReportItems.Count} RiskReportItmes"));
 
                 }
 

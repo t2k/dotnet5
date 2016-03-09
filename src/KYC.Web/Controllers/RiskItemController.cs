@@ -1,124 +1,130 @@
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Rendering;
 using System.Linq;
 using Microsoft.Data.Entity;
 using KYC.Web.Models.KYC;
-using System;
+using System.Collections.Generic;
 
 namespace KYC.Web.Controllers
 {
-    public class RiskClassController : Controller
+    public class RiskItemController : Controller
     {
         private KYCContext _db;
 
-        public RiskClassController(KYCContext db)
+        public RiskItemController(KYCContext db)
         {
             _db=db;
-            
-            Console.WriteLine($"controller is constructed with {_db}");
-            
         }
         
-        // GET: Admin/RiskCategory
+        // GET: Admin/RiskItem
         public IActionResult Index()
         {
-
-            return View(_db.RiskClasses.ToList());
+            
+            var riskItems = _db.RiskItems.Include(r => r.RiskCategory).Include(r => r.RiskClass);
+            
+            return View(riskItems.ToList());
+            
+            
         }
 
-        // GET: Admin/RiskCategory/Details/5
+        // GET: Admin/RiskItem/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskItem RiskItem = _db.RiskItems.SingleOrDefault(i=>i.Id==id);
+            if (RiskItem == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            return View(RiskItem);
         }
 
-        // GET: Admin/RiskCategory/Create
+        // GET: Admin/RiskItem/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/RiskCategory/Create
+        // POST: Admin/RiskItem/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,CategoryName,Ordinal")] RiskClass riskClass)
+        public IActionResult Create([Bind("Id,CategoryName,Ordinal")] RiskItem RiskItem)
         {
             if (ModelState.IsValid)
             {
-                _db.RiskClasses.Add(riskClass);
+                _db.RiskItems.Add(RiskItem);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(riskClass);
+            return View(RiskItem);
         }
 
-        // GET: Admin/RiskCategory/Edit/5
+        // GET: Admin/RiskItem/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskItem riskItem = _db.RiskItems.SingleOrDefault(i=>i.Id==id);
+            if (riskItem == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            ViewBag.RiskCategoryId = new SelectList(_db.RiskCategories, "Id", "CategoryName", riskItem.RiskCategoryId);
+            ViewBag.RiskClassId = new SelectList(_db.RiskClasses, "Id", "Classification", riskItem.RiskClassId);
+            return View(riskItem);
         }
 
-        // POST: Admin/RiskCategory/Edit/5
+        // POST: Admin/RiskItem/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,CategoryName,Ordinal")] RiskClass riskClass)
+        public IActionResult Edit(RiskItem riskItem)
         {
+            System.Console.WriteLine($"Model State: {ModelState.IsValid} RiskItem: {riskItem.Description}");
+            
             if (ModelState.IsValid)
             {
-                _db.Entry(riskClass).State = EntityState.Modified;
+                _db.Entry(riskItem).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(riskClass);
+
+            return RedirectToAction("Index");
         }
 
-        // GET: Admin/RiskCategory/Delete/5
+        // GET: Admin/RiskItem/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(401);
             }
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            if (riskClass == null)
+            RiskItem RiskItem = _db.RiskItems.SingleOrDefault(i=>i.Id==id);
+            if (RiskItem == null)
             {
                 return HttpNotFound();
             }
-            return View(riskClass);
+            return View(RiskItem);
         }
 
-        // POST: Admin/RiskCategory/Delete/5
+        // POST: Admin/RiskItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            RiskClass riskClass = _db.RiskClasses.SingleOrDefault(i=>i.Id==id);
-            _db.RiskClasses.Remove(riskClass);
+            RiskItem riskItem = _db.RiskItems.SingleOrDefault(i=>i.Id==id);
+            _db.RiskItems.Remove(riskItem);
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
+        }       
     }
 }
