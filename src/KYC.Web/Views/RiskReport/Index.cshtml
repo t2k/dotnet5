@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KYC.Web.Models.KYC.RiskReport>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Report List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Version
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SemVer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.RiskReportId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.RiskReportId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.RiskReportId })
+            </td>
+        </tr>
+    }
+
+</table>

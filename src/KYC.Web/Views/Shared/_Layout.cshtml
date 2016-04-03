@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Azure</title>
+
+        <environment names="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">JRK Enterprise Cloud Services, LLC</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Risk<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                        <li><a asp-controller="RiskClass" asp-action="Index">Risk-Class</a></li>
+                        <li><a asp-controller="RiskCategory" asp-action="Index">Risk-Category</a></li>
+                        <li><a asp-controller="RiskItem" asp-action="Index">Risk-Item</a></li>
+                        <li><a asp-controller="RiskReport" asp-action="Index">Report-Manager</a></li>
+                         <!-- 
+                        <li>@Html.ActionLink("Risk-Class", "Index", "RiskClass")</li>
+                        <li>@Html.ActionLink("Risk-Category", "Index", "RiskCategory")</li>
+                        <li>@Html.ActionLink("Risk-Items", "Index", "RiskItem")</li>
+                        <li>@Html.ActionLink("Report Builder", "Index", "RiskReports")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Geographic Risk", "Index", "GeographicRiskRatings")</li>
+                        -->
+                        </ul>
+                    </li>
+                    <!-- 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">SAP<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Legal Form", "Index", "SAPLegalForms")</li>
+                        <li>@Html.ActionLink("BP Status", "Index", "SAPBPStatus")</li>
+                        <li>@Html.ActionLink("Country", "Index", "SAPCountries")</li>
+                        <li>@Html.ActionLink("Legal Entities", "Index", "SAPLegalEntities")</li>
+                        <li>@Html.ActionLink("Risk Sector", "Index", "SAPRiskSectors")</li>
+                        <li>@Html.ActionLink("Systematic", "Index", "SAPSystematics")</li>
+                        <li>@Html.ActionLink("Industry", "Index", "SAPIndustries")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Documents<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Document Type", "Index", "DocumentTypes")</li>
+                        <li>@Html.ActionLink("Document Rules", "Index", "DocumentRules")</li>
+                        <li>@Html.ActionLink("Risk Cycles", "Index", "DocumentRiskCycles")</li>
+                        <li class="divider"></li>
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Employee", "Index", "Employees")</li>
+                    <li>@Html.ActionLink("Role", "Index", "Roles")</li>
+                    <li>@Html.ActionLink("Region", "Index", "Regions")</li>
+                    <li>@Html.ActionLink("Department", "Index", "Departments")</li>
+                    <li>@Html.ActionLink("Migrate", "Index", "DataMigrate")</li>
+                    -->
+                    @await Html.PartialAsync("_LoginPartial")
+                    </ul>
+                </div>
+                
+                <!-- 
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-controller="Home" asp-action="RIIndex">RiskItem</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            -->                
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2016 - KYC.Web</p>
+            </footer>
+        </div>
+
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
